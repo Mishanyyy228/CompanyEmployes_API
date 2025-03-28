@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.HttpOverrides;
 using NLog;
-using ShopApi.Extensions;
+using CompanyEmployes.Extensions;
 
 namespace ShopApi;
 
@@ -24,7 +24,7 @@ public class Startup
 
         services.AddControllers();
         services.AddEndpointsApiExplorer();
-        services.AddSwaggerGen();
+        //services.AddSwaggerGen();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -33,8 +33,8 @@ public class Startup
         if (env.IsDevelopment())
         {
             app.UseDeveloperExceptionPage();
-            app.UseSwagger();
-            app.UseSwaggerUI();
+            //app.UseSwagger();
+            //app.UseSwaggerUI();
         }
 
         app.UseHttpsRedirection();
