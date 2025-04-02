@@ -22,6 +22,7 @@ public class Startup
         services.ConfigureIISIntegration();
         services.ConfigureLoggerService();
 
+        services.ConfigureSqlContext(Configuration);
         services.AddControllers();
         services.AddEndpointsApiExplorer();
         //services.AddSwaggerGen();
