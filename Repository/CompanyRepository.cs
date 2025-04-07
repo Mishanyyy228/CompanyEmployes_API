@@ -16,22 +16,10 @@ namespace Repository
             : base(repositoryContext)
         {
         }
-        private readonly RepositoryContext _context;
+        public IEnumerable<Company> GetAllCompanies(bool trackChanges) =>
+FindAll(trackChanges)
+.OrderBy(c => c.Name)
+.ToList();
 
-
-        public void Create(Company company)
-        {
-            _context.Companies.Add(company);
-        }
-
-        public void Update(Company company)
-        {
-            _context.Companies.Update(company);
-        }
-
-        public void Delete(Company company)
-        {
-            _context.Companies.Remove(company);
-        }
     }
 }
