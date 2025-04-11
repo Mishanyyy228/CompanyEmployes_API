@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.HttpOverrides;
 using NLog;
 using CompanyEmployes.Extensions;
 using Contracts;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ShopApi;
 
@@ -33,6 +34,10 @@ public class Startup
             config.RespectBrowserAcceptHeader = true;
             config.ReturnHttpNotAcceptable = true;
         }).AddNewtonsoftJson().AddXmlDataContractSerializerFormatters().AddCustomCSVFormatter(); ;
+        services.Configure<ApiBehaviorOptions>(options =>
+        {
+            options.SuppressModelStateInvalidFilter = true;
+        });
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
