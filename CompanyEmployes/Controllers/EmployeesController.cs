@@ -33,8 +33,9 @@ namespace CompanyEmployes.Controllers
         }
 
         [HttpGet]
+        [HttpHead]
         public async Task<IActionResult> GetEmployeesForCompany(Guid companyId,
-            [FromQuery] EmployeeParameters employeeParameters)
+        [FromQuery] EmployeeParameters employeeParameters)
         {
             if (!employeeParameters.ValidAgeRange)
                 return BadRequest("Max age can't be less than min age.");

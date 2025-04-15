@@ -11,7 +11,8 @@ using CompanyEmployes.ActionFilters;
 
 namespace CompanyEmployes.Controllers
 {
-    [Route("api/companies/{companyId}/employees")]
+   // [ApiVersion("1.0")]
+    [Route("api/companies")]
     [ApiController]
     public class CompaniesController : ControllerBase
     {
@@ -78,8 +79,7 @@ namespace CompanyEmployes.Controllers
 
         [HttpPost]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
-        public async Task<IActionResult> CreateCompany([FromBody] CompanyForCreationDto
-company)
+        public async Task<IActionResult> CreateCompany([FromBody] CompanyForCreationDto company)
         {
             if (company == null)
             {
@@ -144,6 +144,13 @@ company)
             _mapper.Map(company, companyEntity);
             await _repository.SaveAsync();
             return NoContent();
+        }
+
+        [HttpOptions]
+        public IActionResult GetCompaniesOptions()
+        {
+            Response.Headers.Add("Allow", "GET, OPTIONS, POST");
+            return Ok();
         }
     }
 }
