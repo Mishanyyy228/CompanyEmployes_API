@@ -4,6 +4,8 @@ using CompanyEmployes.Extensions;
 using Contracts;
 using Microsoft.AspNetCore.Mvc;
 using CompanyEmployes.ActionFilters;
+using Entities.DataTransferObjects;
+using Repository.DataShaping;
 
 namespace ShopApi;
 
@@ -42,6 +44,7 @@ public class Startup
         services.AddScoped<ValidationFilterAttribute>();
         services.AddScoped<ValidateCompanyExistsAttribute>();
         services.AddScoped<ValidateEmployeeForCompanyExistsAttribute>();
+        services.AddScoped<IDataShaper<EmployeeDto>, DataShaper<EmployeeDto>>();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
