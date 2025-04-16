@@ -8,6 +8,7 @@ using System;
 using CompanyEmployes.ModelBinders;
 using static System.Collections.Specialized.BitVector32;
 using CompanyEmployes.ActionFilters;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CompanyEmployes.Controllers
 {
@@ -28,7 +29,7 @@ namespace CompanyEmployes.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
+        [HttpGet(Name = "GetCompanies"), Authorize(Roles = "Manager")]
         public async Task<IActionResult> GetCompanies()
         {
             var companies = await _repository.Company.GetAllCompaniesAsync(trackChanges:
