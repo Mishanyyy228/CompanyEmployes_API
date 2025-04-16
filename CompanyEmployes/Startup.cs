@@ -31,7 +31,7 @@ public class Startup
         services.ConfigureRepositoryManager();
         services.AddControllers();
         services.AddEndpointsApiExplorer();
-        //services.AddSwaggerGen();
+        services.AddSwaggerGen();
         services.AddAutoMapper(typeof(Startup));
         services.AddControllers(config => {
             config.RespectBrowserAcceptHeader = true;
@@ -50,6 +50,7 @@ public class Startup
         services.ConfigureIdentity();
         services.ConfigureIdentity();
         services.ConfigureJWT(Configuration);
+        services.ConfigureSwagger();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -82,6 +83,12 @@ public class Startup
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapControllers();
+        });
+        app.UseSwagger();
+        app.UseSwaggerUI(s =>
+        {
+            s.SwaggerEndpoint("/swagger/v1/swagger.json", "Code Maze API v1");
+            s.SwaggerEndpoint("/swagger/v2/swagger.json", "Code Maze API v2");
         });
     }
 }
