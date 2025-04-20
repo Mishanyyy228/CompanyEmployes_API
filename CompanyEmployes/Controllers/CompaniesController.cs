@@ -30,9 +30,9 @@ namespace CompanyEmployes.Controllers
         }
 
         /// <summary> 
-/// Получает список всех компаний 
-/// </summary> 
-/// <returns> Список компаний</returns>. 
+       /// Получает список всех компаний 
+       /// </summary> 
+      /// <returns> Список компаний</returns>. 
         [HttpGet(Name = "GetCompanies"), Authorize(Roles = "Manager")]
         public async Task<IActionResult> GetCompanies()
         {
@@ -41,7 +41,10 @@ namespace CompanyEmployes.Controllers
             var companiesDto = _mapper.Map<IEnumerable<CompanyDto>>(companies);
             return Ok(companiesDto);
         }
-
+        /// <summary>
+        /// Получает список компании по ID
+        /// </summary>
+        /// <returns> Список компаний</returns>
         [HttpGet("{id}", Name = "CompanyById")]
         public async Task<IActionResult> GetCompany(Guid id)
         {
@@ -58,7 +61,10 @@ namespace CompanyEmployes.Controllers
                 return Ok(companyDto);
             }
         }
-
+        /// <summary>
+        /// Получает коллекции списка компаний
+        /// </summary>
+        /// <returns> Коллекция компаний</returns>
         [HttpGet("collection/({ids})", Name = "CompanyCollection")]
         public async Task<IActionResult> GetCompanyCollection(
             [ModelBinder(BinderType = typeof(ArrayModelBinder))] IEnumerable<Guid> ids)
@@ -117,6 +123,10 @@ namespace CompanyEmployes.Controllers
         companyToReturn);
         }
 
+        /// <summary>
+        /// Создает коллекцию компаний
+        /// </summary>
+        /// <returns> Коллекция компаний</returns>
         [HttpPost("collection")]
         public async Task<IActionResult> CreateCompanyCollection(
     [FromBody] IEnumerable<CompanyForCreationDto> companyCollection)
@@ -141,6 +151,10 @@ namespace CompanyEmployes.Controllers
         companyCollectionToReturn);
         }
 
+        /// <summary>
+        /// Удаляет компанию по id
+        /// </summary>
+        /// <returns>Сообщение</returns>
         [HttpDelete("{id}")]
         [ServiceFilter(typeof(ValidateCompanyExistsAttribute))]
         public async Task<IActionResult> DeleteCompany(Guid id)
@@ -151,6 +165,10 @@ namespace CompanyEmployes.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// Обновляет данные
+        /// </summary>
+        /// <returns> Список компаний</returns>
         [HttpPut("{id}")]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         [ServiceFilter(typeof(ValidateCompanyExistsAttribute))] 

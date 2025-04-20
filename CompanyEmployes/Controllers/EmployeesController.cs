@@ -32,6 +32,10 @@ namespace CompanyEmployes.Controllers
             _dataShaper = dataShaper;
         }
 
+        /// <summary>
+        /// Получает список всех сотрудников компании
+        /// </summary>
+        /// <returns> Список сотрудников</returns>
         [HttpGet]
         [HttpHead]
         public async Task<IActionResult> GetEmployeesForCompany(Guid companyId,
@@ -55,6 +59,10 @@ namespace CompanyEmployes.Controllers
             return Ok(_dataShaper.ShapeData(employeesDto, employeeParameters.Fields));
         }
 
+        /// <summary>
+        /// Создает сотрудника компании
+        /// </summary>
+        /// <returns> Сообщение</returns>
         [HttpPost]
         public async Task<IActionResult> CreateEmployeeForCompany(Guid companyId, [FromBody] EmployeeForCreationDto employee)
         {
@@ -85,6 +93,11 @@ namespace CompanyEmployes.Controllers
                 id = employeeToReturn.Id
             }, employeeToReturn);
         }
+
+        /// <summary>
+        /// Удаляет сотрудника компании
+        /// </summary>
+        /// <returns> Сообщение</returns>
         [HttpDelete("{id}")]
         [ServiceFilter(typeof(ValidateEmployeeForCompanyExistsAttribute))]
         public async Task<IActionResult> DeleteEmployeeForCompany(Guid companyId, Guid
@@ -96,6 +109,10 @@ namespace CompanyEmployes.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// Обновляет данные о сотруднике
+        /// </summary>
+        /// <returns> Сообщение</returns>
         [HttpPut("{id}")]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         [ServiceFilter(typeof(ValidateEmployeeForCompanyExistsAttribute))]
@@ -107,10 +124,13 @@ namespace CompanyEmployes.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// Редактирует данные сотрудника
+        /// </summary>
+        /// <returns> Сообщение</returns>
         [HttpPatch("{id}")]
         [ServiceFilter(typeof(ValidateEmployeeForCompanyExistsAttribute))]
-        public async Task<IActionResult> PartiallyUpdateEmployeeForCompany(Guid
- companyId,
+        public async Task<IActionResult> PartiallyUpdateEmployeeForCompany(Guid companyId,
      Guid id, [FromBody] JsonPatchDocument<EmployeeForUpdateDto> patchDoc)
         {
             if (patchDoc == null)
