@@ -30,7 +30,7 @@ namespace CompanyEmployes.Controllers
         }
 
         /// <summary> 
-       /// Получает список всех компаний 
+       /// Возвращает список всех компаний 
        /// </summary> 
       /// <returns> Список компаний</returns>. 
         [HttpGet(Name = "GetCompanies"), Authorize(Roles = "Manager")]
@@ -42,7 +42,7 @@ namespace CompanyEmployes.Controllers
             return Ok(companiesDto);
         }
         /// <summary>
-        /// Получает список компании по ID
+        /// Возвращает список компании по ID
         /// </summary>
         /// <returns> Список компаний</returns>
         [HttpGet("{id}", Name = "CompanyById")]
@@ -62,7 +62,7 @@ namespace CompanyEmployes.Controllers
             }
         }
         /// <summary>
-        /// Получает коллекции списка компаний
+        /// Возвращает коллекции списка компаний
         /// </summary>
         /// <returns> Коллекция компаний</returns>
         [HttpGet("collection/({ids})", Name = "CompanyCollection")]

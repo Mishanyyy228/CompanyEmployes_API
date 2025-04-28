@@ -33,7 +33,7 @@ namespace CompanyEmployes.Controllers
         }
 
         /// <summary>
-        /// Получает список всех сотрудников компании
+        /// Возвращает список всех сотрудников компании
         /// </summary>
         /// <returns> Список сотрудников</returns>
         [HttpGet]
@@ -60,7 +60,7 @@ namespace CompanyEmployes.Controllers
         }
 
         /// <summary>
-        /// Создает сотрудника компании
+        /// Создает сотрудника в компании
         /// </summary>
         /// <returns> Сообщение</returns>
         [HttpPost]
@@ -95,7 +95,7 @@ namespace CompanyEmployes.Controllers
         }
 
         /// <summary>
-        /// Удаляет сотрудника компании
+        /// Удаляет сотрудника в компании
         /// </summary>
         /// <returns> Сообщение</returns>
         [HttpDelete("{id}")]
@@ -125,13 +125,12 @@ namespace CompanyEmployes.Controllers
         }
 
         /// <summary>
-        /// Редактирует данные сотрудника
+        /// Обновляет данных сотрудника
         /// </summary>
         /// <returns> Сообщение</returns>
         [HttpPatch("{id}")]
         [ServiceFilter(typeof(ValidateEmployeeForCompanyExistsAttribute))]
-        public async Task<IActionResult> PartiallyUpdateEmployeeForCompany(Guid companyId,
-     Guid id, [FromBody] JsonPatchDocument<EmployeeForUpdateDto> patchDoc)
+        public async Task<IActionResult> PartiallyUpdateEmployeeForCompany(Guid companyId,Guid id, [FromBody] JsonPatchDocument<EmployeeForUpdateDto> patchDoc)
         {
             if (patchDoc == null)
             {
